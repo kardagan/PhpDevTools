@@ -1,0 +1,12 @@
+{
+  "name" :"PhpDevTools",
+  "description" : "__MSG_application_desc__",
+  "manifest_version":2,
+  "version" :"1.0",
+  "devtools_page": "devtools-page.html",
+  "icons": {
+    "128": "Img/tools.png"
+  },
+  "default_locale" : "fr",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

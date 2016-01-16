@@ -1,0 +1,4 @@
+{
+    "application_desc" : {"message" : "Display php output in Chrome devtools"},
+    "application_name" : {"message" : "PhpDevTools"}
+}
