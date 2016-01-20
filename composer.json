@@ -1,0 +1,19 @@
+{
+    "name": "kardagan/phpdevtools",
+    "description": "PhpDevTools : Débogueur php dans le chrome devtools",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Geoffrey LAURENT",
+            "email": "kardagan.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "files": ["PhpDevTools.class.php"]
+    }
+}
