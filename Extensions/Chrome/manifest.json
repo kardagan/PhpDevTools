@@ -8,5 +8,8 @@
     "128": "Img/tools.png"
   },
   "default_locale" : "fr",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "http://*/"
+  ]
 }
