@@ -1,0 +1,167 @@
+/**
+ * Icons
+ */
+.summary {
+  background-image: url(images/details.gif) !important;
+}
+.reading {
+  background-image: url(images/profiler.gif) !important;
+}
+.post-go {
+  background-image: url(images/post_go.gif) !important;
+}
+.tab-new {
+  background-image: url(images/tab_new.gif) !important;
+}
+.request-add {
+  background-image: url(images/rss_add.gif) !important;
+}
+.request-remove {
+  background-image: url(images/rss_delete.gif) !important;
+}
+.request-load {
+  background-image: url(images/rss_load.gif) !important;
+}
+.details {
+  background-image: url(images/details.gif) !important;
+}
+.open-all {
+  background-image: url(images/tabs.gif) !important;
+}
+.request {
+  width: 16px;
+  height: 16px;
+  background-image: url(images/rss.gif) !important;
+}
+/**
+ * Other styles
+ */
+.request-picker-url {
+  float: left;
+  width: 425px;
+}
+.request-picker-title {
+  /*    float: left;*/
+  color: #777;
+  font-size: 10px;
+}
+.request-list {
+  padding: 0 3px 0 3px;
+}
+.request-list-item {
+  margin-top: 3px;
+  padding-left: 20px;
+  font-size: 11px;
+  line-height: 25px;
+  cursor: pointer;
+  background: no-repeat 0 2px;
+  border: 1px solid #fff;
+  background-size: 20px 20px;
+  height: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.request-list-item.request-list-item-bmp {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/bmp.png);
+}
+.request-list-item.request-list-item-css {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/css.png);
+}
+.request-list-item.request-list-item-gif {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/gif.png);
+}
+.request-list-item.request-list-item-html {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/html.png);
+}
+.request-list-item.request-list-item-ico {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/ico.png);
+}
+.request-list-item.request-list-item-javascript {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/javascript.png);
+}
+.request-list-item.request-list-item-js {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/js.png);
+}
+.request-list-item.request-list-item-png {
+  background-image: url(chrome-extension://__MSG_@@extension_id__/devtools/images/png.png);
+}
+.request-list .x-item-selected {
+  font-weight: bold;
+  color: #15428B;
+  background-color: #DFE8F6;
+  border: 1px dotted #A3BAE9;
+}
+.request-list-item-hover {
+  background-color: #eee;
+}
+.topic {
+  padding: 2px 0 0 20px;
+  background: transparent url(images/post.gif) no-repeat;
+}
+.topic b {
+  font-family: tahoma, verdana;
+  display: block;
+  color: #333;
+}
+.author {
+  color: #333;
+}
+.post-date {
+  font-weight: bold;
+  color: #333;
+}
+.request-grid .x-grid-rowbody {
+  margin: 5px 20px 10px 25px !important;
+  color: #555;
+  font-size: 11px;
+}
+/* Preview classes */
+.profilerpreview .x-toolbar {
+  border-top-width: 1px !important;
+}
+.preview .x-panel-body {
+  background: #fff;
+  color: #222;
+  font: normal 12px tahoma, verdana, arial, sans-serif;
+}
+.preview .x-panel-body p {
+  line-height: 18px;
+  margin: 8px 0;
+}
+.preview .x-panel-body ul {
+  margin-left: 18px;
+}
+.preview .x-panel-body ul li {
+  display: list-item;
+  list-style-image: none !important;
+  list-style-position: outside !important;
+  list-style-type: disc !important;
+  margin-left: 18px;
+}
+.preview .x-panel-body pre,
+#preview .x-panel-body code {
+  background: #f1f1f1;
+  display: block;
+}
+.preview .x-panel-body h4.post-author {
+  font-weight: normal;
+  color: #555;
+  font-size: 11px;
+}
+.preview .x-panel-body span.post-date {
+  font-weight: normal;
+  color: #555;
+  float: right;
+  font-size: 11px;
+}
+.preview .x-panel-body div.post-data {
+  background: #f1f2f4;
+  padding: 5px;
+  border-bottom: 1px solid #dadadb;
+}
+.preview .x-panel-body div.post-body {
+  padding: 10px;
+}
+.x-tab-bar-body {
+  border-width: 1px 1px 0 1px !important;
+}
