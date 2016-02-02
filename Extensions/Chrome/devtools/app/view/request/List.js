@@ -4,7 +4,7 @@ Ext.define('PhpDevTools.view.request.List', {
 
     requires: ['Ext.toolbar.Toolbar'],
 
-    title: 'URLs',
+    title: 'Requests',
     collapsible: false,
     margin: '5 0 5 5',
     layout: 'fit',
@@ -19,7 +19,7 @@ Ext.define('PhpDevTools.view.request.List', {
                 cls: 'request-list',
                 itemSelector: '.request-list-item',
                 overItemCls: 'request-list-item-hover',
-                tpl: '<tpl for="."><div class="request-list-item">{name}</div></tpl>',
+                tpl: '<tpl for="."><div class="request-list-item request-list-item-{type}">{name}</div></tpl>',
             }],
         });
 

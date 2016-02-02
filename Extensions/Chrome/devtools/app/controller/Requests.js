@@ -26,6 +26,8 @@ Ext.define('PhpDevTools.controller.Requests', {
         'PhpDevTools.store.Requests'
     ],
 
+    currentPage : "",
+
     // At this point things haven't rendered yet since init gets called on controllers before the launch function
     // is executed on the Application
     init: function() {
@@ -50,62 +52,52 @@ Ext.define('PhpDevTools.controller.Requests', {
             request = selected[0];
 
         if (request) {
-            this.getRequestShow().setTitle(request.get('name'));
-            grid.enable();
-            store.load({
-                params: {
-                    request: request.get('url')
-                }
-            });            
+            // console.log( request );
         }
     },
     
     /**
      * Shows the add request dialog window
      */
-    addRequest: function() {
-        this.getRequestWindow().show();
-    },
-    
-    /**
-     * Removes the given request from the Requests store
-     * @param {PhpDevTools.model.Request} request The request to remove
-     */
-    removeRequest: function() {
-        this.getRequestsStore().remove(this.getRequestData().getSelectionModel().getSelection()[0]);
-    },
-    
-    /**
-     * @private
-     * Creates a new request in the store based on a given url. First validates that the request is well formed
-     * using PhpDevTools.lib.RequestValidator.
-     * @param {String} name The name of the Request to create
-     * @param {String} url The url of the Request to create
-     */
-    createRequest: function() {
-        var win   = this.getRequestWindow(),
-            form  = this.getRequestForm(),
-            combo = this.getRequestCombo(),
-            store = this.getRequestsStore(),
-            request  = this.getRequestModel().create({
-                name: combo.getDisplayValue(),
-                url: combo.getValue()
-            });
+    addRequest: function(request) {
+        console.log( request );
+        var me = this;
+        var store = this.getRequestsStore();
 
-        form.setLoading({
-            msg: 'Validating request...'
-        });
-        
-        PhpDevTools.lib.RequestValidator.validate(request, {
-            success: function() {
-                store.add(request);
-                form.setLoading(false);
-                win.close();
-            },
-            failure: function() {
-                form.setLoading(false);
-                form.down('#request').markInvalid('The URL specified is not a valid RSS2 request.');
+        if ( request.pageref != this.currentPage ) {
+            this.currentPage = request.pageref;
+            store.removeAll();
+        }
+
+        Ext.Array.each( request.response.headers , function(header) {
+            if ( header.name == "phpdevtools" ) {
+                store.add({
+                    type : request.response.content.mimeType.replace('text/','').replace('application/',''),
+                    name : me.getNameFromUrl(request.request.url),
+                    id : header.value
+                });
             }
         });
+
+
+    },
+
+    getNameFromUrl : function ( url ) {
+        var path = url.split("?");
+        var urlsp = path[0].split("/");
+        var name = "";
+
+        if ( urlsp[urlsp.length-1] === "" ) {
+            name = urlsp[urlsp.length-2] + "/";
+        } else {
+            name = urlsp[urlsp.length-1];
+        }
+
+        if ( typeof path[1] !== "undefined" ) {
+            name += "?" + path[1];
+        }
+
+        return name;
     }
+
 });

@@ -6,7 +6,8 @@ Ext.define('PhpDevTools.model.Request', {
     },
     
     fields: [
-        {name: 'url',  type: 'string'},
-        {name: 'name', type: 'string'}
+        {name: 'name', type: 'string'},
+        {name: 'id', type: 'string'},
+        {name: 'type', type: 'string'}
     ]
 });
