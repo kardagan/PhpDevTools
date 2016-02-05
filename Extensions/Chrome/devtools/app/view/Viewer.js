@@ -2,7 +2,7 @@ Ext.define('PhpDevTools.view.Viewer', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.viewer',
     
-    requires: ['PhpDevTools.view.request.Show'],
+    requires: ['PhpDevTools.view.profiler.Show'],
     
     activeItem: 0,
     margin: '5 5 5 0',

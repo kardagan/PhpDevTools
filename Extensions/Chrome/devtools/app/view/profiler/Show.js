@@ -1,11 +1,6 @@
-Ext.define('PhpDevTools.view.request.Show', {
+Ext.define('PhpDevTools.view.profiler.Show', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.requestshow',
-
-    requires: [
-        'PhpDevTools.view.profiler.Grid',
-        'PhpDevTools.view.profiler.Preview'
-    ],
 
     closable: false,
     layout: {
@@ -16,12 +11,9 @@ Ext.define('PhpDevTools.view.request.Show', {
     initComponent: function() {
         Ext.apply(this, {
             items: [{
-                xtype: 'profilergrid',
+                xtype: 'panel',
+                html : 'coucou',
                 flex: 1
-            },{
-                xtype: 'profilerpreview',
-                cls: 'profilerpreview',
-                height: 300
             }]
         });
 

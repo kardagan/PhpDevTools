@@ -3,8 +3,7 @@ Ext.define('PhpDevTools.controller.Requests', {
 
     stores: ['Requests', 'Profilers'],
     models: ['Request'],
-    views: ['request.Add'],
-    
+
     refs: [
         {ref: 'requestList', selector: 'requestlist'},
         {ref: 'requestData', selector: 'requestlist dataview'},
@@ -21,7 +20,6 @@ Ext.define('PhpDevTools.controller.Requests', {
     ],
     
     requires: [
-        'PhpDevTools.lib.RequestValidator',
         'PhpDevTools.store.Profilers',
         'PhpDevTools.store.Requests'
     ],
