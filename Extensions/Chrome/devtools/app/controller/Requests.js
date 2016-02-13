@@ -6,17 +6,7 @@ Ext.define('PhpDevTools.controller.Requests', {
 
     refs: [
         {ref: 'requestList', selector: 'requestlist'},
-        {ref: 'requestData', selector: 'requestlist dataview'},
-        {ref: 'requestShow', selector: 'requestshow'},
-        {ref: 'requestForm', selector: 'requestwindow form'},
-        {ref: 'requestCombo', selector: 'requestwindow combobox'},
-        {ref: 'profilerGrid', selector: 'profilergrid'},
-        {
-            ref: 'requestWindow',
-            selector: 'requestwindow',
-            autoCreate: true,
-            xtype: 'requestwindow'
-        }
+        {ref: 'requestData', selector: 'requestlist dataview'}
     ],
     
     requires: [
@@ -26,8 +16,6 @@ Ext.define('PhpDevTools.controller.Requests', {
 
     currentPage : "",
 
-    // At this point things haven't rendered yet since init gets called on controllers before the launch function
-    // is executed on the Application
     init: function() {
         this.control({
             'requestlist dataview': {
@@ -45,20 +33,13 @@ Ext.define('PhpDevTools.controller.Requests', {
     },
     
     loadRequest: function(selModel, selected) {
-        var grid = this.getProfilerGrid(),
-            store = this.getProfilersStore(),
-            request = selected[0];
-
+        var request = selected[0];
         if (request) {
-            // console.log( request );
+            this.application.fireEvent('DisplayProfiler',this,request.id);
         }
     },
     
-    /**
-     * Shows the add request dialog window
-     */
     addRequest: function(request) {
-        console.log( request );
         var me = this;
         var store = this.getRequestsStore();
 

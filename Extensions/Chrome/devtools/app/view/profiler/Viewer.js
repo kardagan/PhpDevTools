@@ -1,4 +1,4 @@
-Ext.define('PhpDevTools.view.Viewer', {
+Ext.define('PhpDevTools.view.profiler.Viewer', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.viewer',
     
@@ -10,11 +10,7 @@ Ext.define('PhpDevTools.view.Viewer', {
     cls: 'preview',
     
     initComponent: function() {
-        this.items = [{
-            xtype: 'requestshow',
-            title: 'Sencha Blog'
-        }];
-        
+        this.items = [];
         this.callParent(arguments);
     }
 });

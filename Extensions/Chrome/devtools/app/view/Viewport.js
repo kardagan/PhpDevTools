@@ -2,7 +2,7 @@ Ext.define('PhpDevTools.view.Viewport', {
     extend: 'Ext.container.Viewport',
 
     requires: [
-        'PhpDevTools.view.Viewer',
+        'PhpDevTools.view.profiler.Viewer',
         'PhpDevTools.view.request.List',
         'Ext.layout.container.Border'
     ],
