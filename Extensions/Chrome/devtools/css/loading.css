@@ -1,0 +1,32 @@
+body.loading {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+@keyframes loadingAnimation {
+  0% {
+    box-shadow: 1px 1px 0px #000;
+  }
+  25% {
+    box-shadow: -1px 1px 0px #000;
+  }
+  50% {
+    box-shadow: -1px -1px 0px #000;
+  }
+  75% {
+    box-shadow: 1px -1px 0px #000;
+  }
+  100% {
+    box-shadow: 1px 1px 0px #000;
+  }
+}
+body.loading #loading {
+  animation: loadingAnimation 2s infinite;
+  opacity: 0.5;
+  border: 10px solid #cccccc;
+  padding: 20px;
+  border-radius: 15px;
+}
