@@ -19,7 +19,7 @@ Ext.define('PhpDevTools.controller.Requests', {
     init: function() {
         this.control({
             'requestlist dataview': {
-                selectionchange: this.loadRequest
+                selectionchange: this.selectRequest
             }
         });
     },
@@ -31,8 +31,8 @@ Ext.define('PhpDevTools.controller.Requests', {
         dataview.bindStore(store);
         dataview.getSelectionModel().select(store.getAt(0));
     },
-    
-    loadRequest: function(selModel, selected) {
+
+    selectRequest: function(selModel, selected) {
         var request = selected[0];
         if (request) {
             this.application.fireEvent('DisplayProfiler',this,request.id);
