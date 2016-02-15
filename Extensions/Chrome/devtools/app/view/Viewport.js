@@ -2,7 +2,7 @@ Ext.define('PhpDevTools.view.Viewport', {
     extend: 'Ext.container.Viewport',
 
     requires: [
-        'PhpDevTools.view.profiler.Viewer',
+        'PhpDevTools.view.profiler.Profilers',
         'PhpDevTools.view.request.List',
         'Ext.layout.container.Border'
     ],
@@ -11,7 +11,7 @@ Ext.define('PhpDevTools.view.Viewport', {
 
     items: [{
         region: 'center',
-        xtype: 'viewer'
+        xtype: 'profilers'
     }, {
         region: 'west',
         width: 225,

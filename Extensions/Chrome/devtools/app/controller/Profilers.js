@@ -1,17 +1,16 @@
 Ext.define('PhpDevTools.controller.Profilers', {
     extend: 'Ext.app.Controller',
 
+    requires : ['PhpDevTools.view.profiler.Profiler'],
+
     stores: ['Profilers'],
 
     models: ['Profiler'],
 
     refs: [
         {
-            ref: 'requestShow',
-            selector: 'requestshow'
-        }, {
-            ref: 'viewer',
-            selector: 'viewer'
+            ref: 'profilers',
+            selector: 'profilers'
         }
     ],
 
@@ -23,7 +22,16 @@ Ext.define('PhpDevTools.controller.Profilers', {
     },
 
     displayProfiler : function ( id ) {
+        var me = this;
 
+        if ( ! me.getProfilers().showProfiler( "profiler_" + id ) ) {
+            me.getProfilers().add({
+                xtype:'profiler',
+                itemId : "profiler_" + id,
+                title : id
+            });
+            me.getProfilers().showProfiler( "profiler_" + id );
+        }
     }
 
 
