@@ -45,7 +45,7 @@ Ext.define('PhpDevTools.controller.Requests', {
 
         if ( request.pageref != this.currentPage ) {
             this.currentPage = request.pageref;
-            // store.removeAll();
+            store.removeAll();
         }
 
         Ext.Array.each( request.response.headers , function(header) {
