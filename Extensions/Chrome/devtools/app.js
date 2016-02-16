@@ -1,3 +1,4 @@
+Ext.setGlyphFontFamily('FontAwesome');
 Ext.application({
     name: 'PhpDevTools',
 
