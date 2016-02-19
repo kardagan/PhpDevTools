@@ -17,9 +17,16 @@ Ext.define('PhpDevTools.controller.Requests', {
     currentPage : "",
 
     init: function() {
+        var me = this;
+
         this.control({
             'requestlist dataview': {
                 selectionchange: this.selectRequest
+            },
+            'requestlist tool[type=gear]' : {
+                click : function () {
+                    me.application.getConfigController().openConfig();
+                }
             }
         });
     },
@@ -35,7 +42,7 @@ Ext.define('PhpDevTools.controller.Requests', {
     selectRequest: function(selModel, selected) {
         var request = selected[0];
         if (request) {
-            this.application.fireEvent('DisplayProfiler',this,request.id);
+            this.application.getProfilersController().displayProfiler(request.id);
         }
     },
     

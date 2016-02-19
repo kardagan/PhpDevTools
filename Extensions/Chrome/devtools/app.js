@@ -10,7 +10,8 @@ Ext.application({
     // Define all the controllers that should initialize at boot up of your application
     controllers: [
         'Profilers',
-        'Requests'
+        'Requests',
+        'Config'
     ],
 
     autoCreateViewport: true,
@@ -22,15 +23,18 @@ Ext.application({
 
         document.body.className = document.body.className.replace("loading","");
 
-        chrome.devtools.network.getHAR( function ( requests ) {
-            Ext.Array.each(requests.entries,function(request){
+        try {
+
+            chrome.devtools.network.getHAR( function ( requests ) {
+                Ext.Array.each(requests.entries,function(request){
+                    PhpDevTools.app.getRequestsController().addRequest( request );
+                })
+            });
+
+            chrome.devtools.network.onRequestFinished.addListener( function(request) {
                 PhpDevTools.app.getRequestsController().addRequest( request );
-            })
-        });
+            });
 
-        chrome.devtools.network.onRequestFinished.addListener( function(request) {
-            PhpDevTools.app.getRequestsController().addRequest( request );
-        });
-
+        } catch (e) {}
     }
 });

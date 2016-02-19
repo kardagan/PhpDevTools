@@ -14,13 +14,6 @@ Ext.define('PhpDevTools.controller.Profilers', {
         }
     ],
 
-    init: function() {
-        var me = this;
-        this.application.on("DisplayProfiler", function(obj,id) {
-            me.displayProfiler(id)
-        });
-    },
-
     displayProfiler : function ( id ) {
         var me = this;
 

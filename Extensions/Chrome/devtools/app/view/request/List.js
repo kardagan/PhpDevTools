@@ -11,8 +11,15 @@ Ext.define('PhpDevTools.view.request.List', {
 
     initComponent: function() {
 
-        Ext.apply(this, {
-            items: [{
+        this.tools=[
+            {
+                type:'gear',
+                tooltip: 'Configure'
+            }
+        ],
+
+        this.items = [
+            {
                 xtype: 'dataview',
                 trackOver: true,
                 store: this.store,
@@ -20,8 +27,8 @@ Ext.define('PhpDevTools.view.request.List', {
                 itemSelector: '.request-list-item',
                 overItemCls: 'request-list-item-hover',
                 tpl: '<tpl for="."><div class="request-list-item request-list-item-{type}">{name}</div></tpl>',
-            }],
-        });
+            }
+        ];
 
         this.callParent(arguments);
     }
