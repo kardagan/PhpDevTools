@@ -24,10 +24,10 @@ Ext.define('PhpDevTools.view.config.Grid', {
 
         this.columns = [
             { text: 'Ordre'       , dataIndex: 'order' },
-            { text: 'status'      , dataIndex: 'status' , display : false},
+            { text: 'status'      , dataIndex: 'status' , hidden : true},
             { text: 'Domain'      , dataIndex: 'domain'      , editor: 'textfield'},
             { text: 'ProfilerUrl' , dataIndex: 'profilerurl' , editor: 'textfield', flex: 1 },
-            { text: 'VanName'     , dataIndex: 'varname'     , editor: 'textfield'},
+            { text: 'VarName'     , dataIndex: 'varname'     , editor: 'textfield'},
             {
                 xtype:'actioncolumn',
                 width:50,
