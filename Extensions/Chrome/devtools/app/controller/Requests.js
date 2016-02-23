@@ -1,7 +1,7 @@
 Ext.define('PhpDevTools.controller.Requests', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Requests', 'Profilers'],
+    stores: ['Requests'],
     models: ['Request'],
 
     refs: [
@@ -36,7 +36,6 @@ Ext.define('PhpDevTools.controller.Requests', {
             store = this.getRequestsStore();
             
         dataview.bindStore(store);
-        dataview.getSelectionModel().select(store.getAt(0));
     },
 
     selectRequest: function(selModel, selected) {
