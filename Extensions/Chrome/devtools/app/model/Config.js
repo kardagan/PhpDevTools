@@ -3,8 +3,9 @@ Ext.define('PhpDevTools.model.Config', {
 
     fields: [
         { name: 'status',      type: 'string', persist:false},
-        { name: 'order',       type: 'int', },
-        { name: 'domain',     type: 'string', defaultValue:'*' },
+        { name: 'neworder',    type: 'int',    persist:false},
+        { name: 'order',       type: 'int'},
+        { name: 'domain',      type: 'string', defaultValue:'*' },
         { name: 'profilerurl', type: 'string', defaultValue:'/phpdevtools.json' },
         { name: 'varname',     type: 'string', defaultValue:'phpdevtools' }
     ],

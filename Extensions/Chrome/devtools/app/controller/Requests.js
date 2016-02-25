@@ -1,7 +1,7 @@
 Ext.define('PhpDevTools.controller.Requests', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Requests'],
+    stores: ['Requests','Configs'],
     models: ['Request'],
 
     refs: [
@@ -48,22 +48,32 @@ Ext.define('PhpDevTools.controller.Requests', {
     addRequest: function(request) {
         var me = this;
         var store = this.getRequestsStore();
+        var configs = this.getConfigsStore();
 
         if ( request.pageref != this.currentPage ) {
             this.currentPage = request.pageref;
             store.removeAll();
         }
 
-        Ext.Array.each( request.response.headers , function(header) {
-            if ( header.name == "phpdevtools" ) {
-                store.add({
-                    type : request.response.content.mimeType.replace('text/','').replace('application/',''),
-                    name : me.getNameFromUrl(request.request.url),
-                    id : header.value
-                });
-            }
-        });
+        var domain = request.request.url.split('/')[2];
 
+        configs.each ( function (config ) {
+
+            if ( me.fnmatch( domain , config.get('domain') ) ) {
+
+                Ext.Array.each( request.response.headers , function(header) {
+                    if ( header.name == config.get('varname') ) {
+                        store.add({
+                            type : request.response.content.mimeType.replace('text/','').replace('application/',''),
+                            name : me.getNameFromUrl(request.request.url),
+                            id : header.value,
+                            profilerurl : config.get('profilerurl')
+                        });
+                    }
+                });
+
+            }
+        })
 
     },
 
@@ -83,6 +93,12 @@ Ext.define('PhpDevTools.controller.Requests', {
         }
 
         return name;
+    },
+
+    fnmatch : function ( s , p ) {
+        p = p.replace( /\./gi , "." );
+        p = p.replace( /\*/gi , "(.*)" );
+        return s.match( p );
     }
 
 });

@@ -5,5 +5,13 @@ Ext.define('PhpDevTools.store.Configs', {
     proxy: {
         type: 'localstorage',
         id  : 'phpdevtools-config'
+    },
+    sorters: "order",
+    listeners : {
+        load : function ( s , records, successful, eOpts ) {
+            Ext.Array.each( records , function ( record ) {
+                record.set('neworder',record.get('order'))
+            });
+        }
     }
 });

@@ -8,6 +8,8 @@ Ext.define('PhpDevTools.model.Request', {
     fields: [
         {name: 'name', type: 'string'},
         {name: 'id', type: 'string'},
-        {name: 'type', type: 'string'}
+        {name: 'type', type: 'string'},
+        {name: 'profilerurl', type : 'string'}
     ]
+
 });
