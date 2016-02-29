@@ -36,6 +36,7 @@ class PhpDevTools {
     }
 
     public static function getJson( $psId ) {
+        header('Access-Control-Allow-Headers:X-Requested-With');
         header('Access-Control-Allow-Origin:*');
         header('Content-Type:application/json');
         $aDebug = self::getRedisConnection()->lrange(self::getKey($psId),0,-1);
