@@ -28,7 +28,7 @@ Ext.define('PhpDevTools.view.config.Grid', {
                 sortable : false
             },
             items : [
-                { text: 'id'          , dataIndex: 'id'},
+                { text: 'id'          , dataIndex: 'id', hidden : true},
                 { text: 'Ordre'       , dataIndex: 'order', hidden : true},
                 { text: 'Ordre'       , dataIndex: 'neworder' },
                 { text: 'status'      , dataIndex: 'status', hidden : true},
