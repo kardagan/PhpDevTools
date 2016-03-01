@@ -61,7 +61,7 @@ class PhpDevTools {
 
     private static function record( $data ) {
         $key = self::getKey(self::getId());
-        self::getRedisConnection()->lpush($key,json_encode($data));
+        self::getRedisConnection()->rpush($key,json_encode($data));
         self::getRedisConnection()->expire($key,self::$redis_ttl);
     }
 
