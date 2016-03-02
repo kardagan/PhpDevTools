@@ -14,17 +14,35 @@ Ext.define('PhpDevTools.controller.Profilers', {
         }
     ],
 
-    displayProfiler : function ( id ) {
+    displayProfiler : function ( request ) {
         var me = this;
 
-        if ( ! me.getProfilers().showProfiler( "profiler_" + id ) ) {
+        if ( ! me.getProfilers().showProfiler( "profiler_" + request.get('id') ) ) {
+
+            var store = Ext.create('PhpDevTools.store.Profilers',{
+                autoLoad:true,
+                proxy: {
+                    type: 'ajax',
+                    url: request.get('profilerurl'),
+                    reader: {
+                        type: 'json'
+                    }
+                }
+            });
+
             me.getProfilers().add({
                 xtype:'profiler',
                 itemId : "profiler_" + id,
-                title : id
+                title : id,
+                store : store
             });
+
             me.getProfilers().showProfiler( "profiler_" + id );
         }
+    },
+
+    removeAllProfilers : function () {
+        this.getProfilers().removeAll();
     }
 
 

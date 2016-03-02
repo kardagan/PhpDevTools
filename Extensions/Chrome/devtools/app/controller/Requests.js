@@ -41,7 +41,7 @@ Ext.define('PhpDevTools.controller.Requests', {
     selectRequest: function(selModel, selected) {
         var request = selected[0];
         if (request) {
-            this.application.getProfilersController().displayProfiler(request.id);
+            this.application.getProfilersController().displayProfiler(request);
         }
     },
     
@@ -50,9 +50,15 @@ Ext.define('PhpDevTools.controller.Requests', {
         var store = this.getRequestsStore();
         var configs = this.getConfigsStore();
 
+
+
+        if (request==null) return false;
+
+
         if ( request.pageref != this.currentPage ) {
             this.currentPage = request.pageref;
             store.removeAll();
+            this.application.getProfilersController().removeAllProfilers();
         }
 
         var domain = request.request.url.split('/')[2];
@@ -62,12 +68,21 @@ Ext.define('PhpDevTools.controller.Requests', {
             if ( me.fnmatch( domain , config.get('domain') ) ) {
 
                 Ext.Array.each( request.response.headers , function(header) {
+
+                    var url = config.get('profilerurl').replace(/#id#/,header.value);
+                    var domaine = config.get('profilerurl').match(/^(https?:\/\/[^/]*)/gi);
+
+                    if ( domaine == null ) {
+                        domaine = request.request.url.match(/^(https?:\/\/[^/]*)/gi);
+                        url = domaine + url;
+                    }
+
                     if ( header.name == config.get('varname') ) {
                         store.add({
                             type : request.response.content.mimeType.replace('text/','').replace('application/',''),
                             name : me.getNameFromUrl(request.request.url),
                             id : header.value,
-                            profilerurl : config.get('profilerurl')
+                            profilerurl : url
                         });
                     }
                 });

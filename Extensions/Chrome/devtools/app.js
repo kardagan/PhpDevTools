@@ -23,6 +23,7 @@ Ext.application({
 
         document.body.className = document.body.className.replace("loading","");
 
+
         try {
 
             chrome.devtools.network.getHAR( function ( requests ) {

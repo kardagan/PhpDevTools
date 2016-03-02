@@ -9,6 +9,8 @@ Ext.define('PhpDevTools.view.profiler.Profilers', {
         hidden : true
     },
 
+    store : null,
+
     initComponent: function() {
         this.items = [];
         this.callParent(arguments);
