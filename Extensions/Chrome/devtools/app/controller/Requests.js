@@ -50,9 +50,9 @@ Ext.define('PhpDevTools.controller.Requests', {
         var store = this.getRequestsStore();
         var configs = this.getConfigsStore();
 
-
-
-        if (request==null) return false;
+        if (request==null) {
+            return false;
+        }
 
 
         if ( request.pageref != this.currentPage ) {

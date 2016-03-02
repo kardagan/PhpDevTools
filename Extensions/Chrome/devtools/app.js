@@ -23,7 +23,6 @@ Ext.application({
 
         document.body.className = document.body.className.replace("loading","");
 
-
         try {
 
             chrome.devtools.network.getHAR( function ( requests ) {
@@ -36,6 +35,7 @@ Ext.application({
                 PhpDevTools.app.getRequestsController().addRequest( request );
             });
 
-        } catch (e) {}
+        } catch (e) {
+        }
     }
 });
