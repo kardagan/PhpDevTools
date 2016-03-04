@@ -32,12 +32,12 @@ Ext.define('PhpDevTools.controller.Profilers', {
 
             me.getProfilers().add({
                 xtype:'profiler',
-                itemId : "profiler_" + id,
-                title : id,
+                itemId : "profiler_" + request.get('id'),
+                title : request.get('id'),
                 store : store
             });
 
-            me.getProfilers().showProfiler( "profiler_" + id );
+            me.getProfilers().showProfiler( "profiler_" + request.get('id') );
         }
     },
 
