@@ -41,7 +41,7 @@ class PhpDevTools {
 
     public static function init() {
         self::getId();
-        self::$ref = new \PhpDevTools\ref();
+        self::$ref = new \PhpDevTools\ref\ref();
     }
 
     public static function getJson( $psId ) {
