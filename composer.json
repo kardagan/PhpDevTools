@@ -11,10 +11,10 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php"           : ">=5.4",
-        "predis/predis" : "1.0.*"
+        "php"                : ">=5.4",
+        "predis/predis"      : "1.0.*"
     },
     "autoload": {
-        "files": ["PhpDevTools.class.php"]
+        "files": ["PhpDevTools.class.php","ref.class.php"]
     }
 }

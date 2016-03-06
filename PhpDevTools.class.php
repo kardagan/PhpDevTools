@@ -1,4 +1,5 @@
 <?php
+namespace PhpDevTools;
 
 class PhpDevTools {
 
@@ -10,7 +11,10 @@ class PhpDevTools {
     private static $redis_host = '127.0.0.1';
     private static $redis_port = 6379;
     private static $redis_database = 0;
-    private static $redis_ttl = 60;
+    private static $redis_ttl = 3600;
+
+    /* ref dump */
+    private static $ref = null;
 
     public static function __callStatic($name, $arguments) {
         if ( !in_array($name,['log','dump','database']) ) {
@@ -18,9 +22,13 @@ class PhpDevTools {
         }
 
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
+
         $data = [
             'type' => $name,
-            'data' => $arguments,
+            'data' => self::$ref->query($arguments[0]),
+            'var' => [
+
+            ],
             'origin' => [
                 'file' => $backtrace[0]['file'],
                 'line' => $backtrace[0]['line']
@@ -33,6 +41,7 @@ class PhpDevTools {
 
     public static function init() {
         self::getId();
+        self::$ref = new \PhpDevTools\ref();
     }
 
     public static function getJson( $psId ) {
