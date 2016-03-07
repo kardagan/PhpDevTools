@@ -109,10 +109,11 @@ class RHtmlFormatter extends RFormatter{
 
 
     public function flush(){
-        print $this->out;
+        $res = $this->out;
         $this->out   = '';
         $this->cache = array();
         $this->tips  = array();
+        return $res;
     }
 
 
@@ -284,7 +285,7 @@ class RHtmlFormatter extends RFormatter{
     }
 
     public function startRoot(){
-        $this->out .= '<!-- ref#' . ++static::$counter . ' --><div>' . static::getAssets() . '<div class="ref">';
+        $this->out .= '<!-- ref#' . ++static::$counter . ' --><div><div class="ref">';
     }
 
     public function endRoot(){

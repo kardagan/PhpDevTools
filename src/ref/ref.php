@@ -228,9 +228,10 @@ class ref{
     $this->fmt->endExp();
     $this->evaluate($subject);    
     $this->fmt->endRoot();
-    $this->fmt->flush();
 
-    static::$time += microtime(true) - $this->startTime;     
+    static::$time += microtime(true) - $this->startTime;
+
+    return $this->fmt->flush();
   }
 
 
