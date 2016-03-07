@@ -149,9 +149,9 @@ class ref{
       $this->fmt = $format;
 
     }else{
-      $format = isset(static::$config['formatters'][$format]) ? static::$config['formatters'][$format] : 'R' . ucfirst($format) . 'Formatter';
+      $format = __NAMESPACE__ . '\\' . ( isset(static::$config['formatters'][$format]) ? static::$config['formatters'][$format] : 'R' . ucfirst($format) . 'Formatter' );
 
-      if(!class_exists($format, false))
+      if(!class_exists($format, true))
         throw new \Exception(sprintf('%s class not found', $format));
 
       $this->fmt = new $format();
