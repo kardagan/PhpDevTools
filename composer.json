@@ -15,11 +15,8 @@
         "predis/predis"      : "1.0.*"
     },
     "autoload": {
-        "files": [
-            "PhpDevTools.class.php"
-        ],
-        "psr-0": {
-            "ref": "ref/"
+        "psr-4": {
+            "PhpDevTools\\": "src/"
         }
     }
 }
