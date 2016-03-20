@@ -725,16 +725,10 @@ class ref{
     $trace = defined('DEBUG_BACKTRACE_IGNORE_ARGS') ? debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) : debug_backtrace();
 
     while($callee = array_pop($trace)){
-
-      // extract only the information we neeed
-      $callee = array_intersect_key($callee, array_fill_keys(array('file', 'function', 'line'), false));
-      extract($callee, EXTR_OVERWRITE);
-
       // skip, if the called function doesn't match the shortcut function name
-      if(!$function || !in_array(mb_strtolower((string)$function), static::$config['shortcutFunc']))
+      if(! isset($callee['class']) || (string)$callee['class'] != 'PhpDevTools\PhpDevTools')
         continue;
-
-      return compact('file', 'function', 'line');
+      return $callee;
     }
 
     return false;
@@ -748,7 +742,7 @@ class ref{
    * @param   array &$options   Optional, options to gather (from operators)
    * @return  array             Array of string expressions
    */
-  public static function getInputExpressions(array &$options = null){    
+  public static function getInputExpressions(array &$options = null){
 
     // used to determine the position of the current call,
     // if more queries calls were made on the same line
@@ -763,6 +757,8 @@ class ref{
 
     $code     = file($file);
     $code     = $code[$line - 1]; // multiline expressions not supported!
+    // ajout d'un replacement car l'appel en static ne fonctionne pas
+    $code     = preg_replace('/^(@|\+|\-|~|!){0,1}([^(]*)(\(.*\)[^)]*)$/', '$1' . $function . '$3' , $code);
     $instIndx = 0;
     $tokens   = token_get_all("<?php {$code}");
 

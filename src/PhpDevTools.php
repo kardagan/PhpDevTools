@@ -23,9 +23,13 @@ class PhpDevTools {
 
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
 
+        $options = array();
+
+        $expressions = self::$ref->getInputExpressions($options);
+
         $data = [
             'type' => $name,
-            'data' => self::$ref->query($arguments[0]),
+            'data' => self::$ref->query($arguments[0] , $expressions[0] ? $expressions[0] : null ),
             'var' => [
 
             ],
