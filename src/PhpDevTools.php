@@ -4,23 +4,30 @@ namespace PhpDevTools;
 class PhpDevTools {
 
     /* id de la page qui est envoyé dans le header */
-    private static $id = null;
+    protected static $id = null;
 
-    /* redis */
-    private static $redis_connection = null;
-    private static $redis_host = '127.0.0.1';
-    private static $redis_port = 6379;
-    private static $redis_database = 0;
-    private static $redis_ttl = 3600;
+    /* conf */
+    protected static $conf = array (
+        'redis' => array (
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'database' => 0,
+            'ttl' => 3600
+        )
+    );
+
+    protected static $redis_connection = null;
 
     /* ref dump */
     private static $ref = null;
 
     public static function __callStatic($name, $arguments) {
-        if ( !in_array($name,['log','dump','database']) ) {
+        if ( self::$id === null ) {
             return false;
         }
-
+        if ( !in_array($name,['log','dump','database']) ) {
+            throw new \Exception("Call to undefined function");
+        }
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
 
         $options = array();
@@ -75,16 +82,16 @@ class PhpDevTools {
     private static function record( $data ) {
         $key = self::getKey(self::getId());
         self::getRedisConnection()->rpush($key,json_encode($data));
-        self::getRedisConnection()->expire($key,self::$redis_ttl);
+        self::getRedisConnection()->expire($key,self::$conf['redis']['ttl']);
     }
 
     private static function getRedisConnection () {
         if ( self::$redis_connection === null ) {
             self::$redis_connection = new \Predis\Client([
-                'host'=>self::$redis_host,
-                'port'=>self::$redis_port,
+                'host'=>self::$conf['redis']['host'],
+                'port'=>self::$conf['redis']['port'],
             ]);
-            self::$redis_connection->select(self::$redis_database);
+            self::$redis_connection->select(self::$conf['redis']['database']);
         }
         return self::$redis_connection;
     }
