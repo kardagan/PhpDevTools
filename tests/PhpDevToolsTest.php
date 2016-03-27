@@ -48,4 +48,11 @@ class PhpDevToolsTest extends PHPUnit_Framework_TestCase
     public function testCallLogWithoutInit() {
         $this->assertEquals( false , PhpDevToolsMock::log('xxxxx') );
     }
+
+    public function testCallUndefinedFunction() {
+        $this->expectException("\\Exception");
+        $this->expectExceptionMessage('Call to undefined function');
+        PhpDevToolsMock::init();
+        PhpDevToolsMock::foo('xxxxx');
+    }
 }
