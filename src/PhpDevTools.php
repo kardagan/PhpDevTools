@@ -16,6 +16,10 @@ class PhpDevTools {
         )
     );
 
+    public static function getTheId ( ) {
+        return self::$id;
+    }
+
     protected static $redis_connection = null;
 
     /* ref dump */
@@ -94,6 +98,10 @@ class PhpDevTools {
             self::$redis_connection->select(self::$conf['redis']['database']);
         }
         return self::$redis_connection;
+    }
+
+    public function getHiAtoum () {
+        return "coucou";
     }
 
 }
