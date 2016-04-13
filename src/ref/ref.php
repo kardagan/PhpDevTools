@@ -81,7 +81,7 @@ class ref{
 
                 // whether to produce W3c-valid HTML,
                 // or unintelligible, but optimized markup that takes less space
-                'validHtml'            => false,
+                'validHtml'            => true,
               ),
 
     /**

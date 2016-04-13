@@ -2,9 +2,16 @@ Ext.define('PhpDevTools.view.profiler.Collector', {
     extend:'Ext.view.View',
     flex:1,
     closable: false,
+    scrollable : true,
 
     display : function ( profiler ) {
         this.getStore().add(profiler)
+    },
+
+    listeners : {
+        boxready : function ( tab , eOpts ) {
+            refTools();
+        }
     },
 
     initComponent : function () {

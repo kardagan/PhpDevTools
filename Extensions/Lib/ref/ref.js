@@ -1,9 +1,11 @@
-window.addEventListener('load', function(){
-
+function refTools () {
   var tip  = document.createElement('div'),
       refs = document.querySelectorAll('.ref');
 
   for(var i = 0, m = refs.length; i < m; i++){
+    if ( refs[i].className.indexOf('havebeenparsed') != -1 ) continue;
+    refs[i].className += ' havebeenparsed';
+
     var kbds     = refs[i].querySelectorAll('[data-toggle]'),
         tippable = refs[i].querySelectorAll('[data-tip]'),
         tips     = refs[i].querySelectorAll('div');        
@@ -69,5 +71,4 @@ window.addEventListener('load', function(){
 
   });
 
-});
-
+}
