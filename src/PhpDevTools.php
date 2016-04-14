@@ -44,18 +44,9 @@ class PhpDevTools {
 
     private static function addLog( $data ) {
 
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
-
         $data = [
             'type' => 'log',
-            'data' => self::$ref->query($data , 'log' ),
-            'var' => [
-
-            ],
-            'origin' => [
-                'file' => $backtrace[0]['file'],
-                'line' => $backtrace[0]['line']
-            ]
+            'data' => self::$ref->query($data , 'log' )
         ];
 
         self::record( $data );
@@ -64,22 +55,13 @@ class PhpDevTools {
     }
 
     private static function addDump( $data ) {
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
-
         $options = array();
 
         $expressions = self::$ref->getInputExpressions($options);
 
         $data = [
             'type' => 'dump',
-            'data' => self::$ref->query($data , $expressions[0] ? $expressions[0] : null ),
-            'var' => [
-
-            ],
-            'origin' => [
-                'file' => $backtrace[0]['file'],
-                'line' => $backtrace[0]['line']
-            ]
+            'data' => self::$ref->query($data , $expressions[0] ? $expressions[0] : null )
         ];
 
         self::record( $data );
@@ -87,22 +69,13 @@ class PhpDevTools {
     }
 
     private static function addDatabase ($data) {
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
-
         $options = array();
 
         $expressions = self::$ref->getInputExpressions($options);
 
         $data = [
             'type' => 'database',
-            'data' => self::$ref->query( $data , $expressions[0] ? $expressions[0] : null ),
-            'var' => [
-
-            ],
-            'origin' => [
-                'file' => $backtrace[0]['file'],
-                'line' => $backtrace[0]['line']
-            ]
+            'data' => self::$ref->query( $data , $expressions[0] ? $expressions[0] : null )
         ];
 
         self::record( $data );

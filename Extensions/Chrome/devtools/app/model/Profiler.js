@@ -3,7 +3,6 @@ Ext.define('PhpDevTools.model.Profiler', {
     
     fields: [
         {name: 'type', type:'string'},
-        {name: 'data', type:'auto'},
-        {name: 'origin', type:'auto'},
+        {name: 'data', type:'auto'}
     ]
 });
