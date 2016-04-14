@@ -32,6 +32,38 @@ class PhpDevTools {
         if ( !in_array($name,['log','dump','database']) ) {
             throw new \Exception("Call to undefined function");
         }
+
+        switch ( $name ) {
+            case 'log' : self::addLog( $arguments[0] ); break;
+            case 'dump' : self::addDump( $arguments[0] ); break;
+            case 'database' : self::addDatabase( $arguments[0] ); break;
+        }
+
+        return true;
+    }
+
+    private static function addLog( $data ) {
+
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
+
+        $data = [
+            'type' => 'log',
+            'data' => self::$ref->query($data , 'log' ),
+            'var' => [
+
+            ],
+            'origin' => [
+                'file' => $backtrace[0]['file'],
+                'line' => $backtrace[0]['line']
+            ]
+        ];
+
+        self::record( $data );
+        return true;
+
+    }
+
+    private static function addDump( $data ) {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
 
         $options = array();
@@ -39,8 +71,31 @@ class PhpDevTools {
         $expressions = self::$ref->getInputExpressions($options);
 
         $data = [
-            'type' => $name,
-            'data' => self::$ref->query($arguments[0] , $expressions[0] ? $expressions[0] : null ),
+            'type' => 'dump',
+            'data' => self::$ref->query($data , $expressions[0] ? $expressions[0] : null ),
+            'var' => [
+
+            ],
+            'origin' => [
+                'file' => $backtrace[0]['file'],
+                'line' => $backtrace[0]['line']
+            ]
+        ];
+
+        self::record( $data );
+        return true;
+    }
+
+    private static function addDatabase ($data) {
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
+
+        $options = array();
+
+        $expressions = self::$ref->getInputExpressions($options);
+
+        $data = [
+            'type' => 'database',
+            'data' => self::$ref->query( $data , $expressions[0] ? $expressions[0] : null ),
             'var' => [
 
             ],
