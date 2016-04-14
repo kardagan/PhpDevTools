@@ -277,8 +277,8 @@ class RHtmlFormatter extends RFormatter{
         $this->out .= "<{$this->def['base']} data-input>";
     }
 
-    public function endExp(){
-        if(ref::config('showBacktrace') && ($trace = ref::getBacktrace()))
+    public function endExp( $disableBacktrace = false ){
+        if(!$disableBacktrace && ref::config('showBacktrace') && ($trace = ref::getBacktrace()))
             $this->out .= "<{$this->def['base']} data-backtrace>{$trace['file']}:{$trace['line']}</{$this->def['base']}>";
 
         $this->out .= "</{$this->def['base']}><{$this->def['base']} data-output>";

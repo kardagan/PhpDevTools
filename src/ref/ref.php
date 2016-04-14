@@ -214,8 +214,9 @@ class ref{
    *   
    * @param   mixed $subject
    * @param   string $expression
+   * @param   boolean $disableBacktrace
    */
-  public function query($subject, $expression = null){
+  public function query($subject, $expression = null, $disableBacktrace = false){
 
     if(static::$timeout > 0)
       return;
@@ -225,7 +226,7 @@ class ref{
     $this->fmt->startRoot();
     $this->fmt->startExp();
     $this->evaluateExp($expression);
-    $this->fmt->endExp();
+    $this->fmt->endExp( $disableBacktrace );
     $this->evaluate($subject);    
     $this->fmt->endRoot();
 

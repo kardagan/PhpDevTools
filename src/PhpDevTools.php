@@ -57,6 +57,22 @@ class PhpDevTools {
     public static function init() {
         self::getId();
         self::$ref = new \PhpDevTools\ref\ref();
+        self::saveRequest();
+    }
+
+    private static function saveRequest () {
+        $aLstRequest = array ( '_GET' , '_POST' , '_COOKIE' , '_SERVER' );
+        foreach ( $aLstRequest as $sRequest ) {
+            $data = [
+                'type' => 'request',
+                'data' => self::$ref->query( $GLOBALS[$sRequest] , '$' . $sRequest , true ),
+                'var' => [
+
+                ],
+                'origin' => null
+            ];
+            self::record( $data );
+        }
     }
 
     public static function getJson( $psId ) {
