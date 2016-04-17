@@ -30,23 +30,29 @@ class PhpDevTools {
             return false;
         }
         if ( !in_array($name,['log','dump','database']) ) {
-            throw new \Exception("Call to undefined function");
+
         }
 
         switch ( $name ) {
-            case 'log' : self::addLog( $arguments[0] ); break;
+            case 'log' :
+            case 'alert' :
+            case 'error' :
+            case 'info' :
+                self::addLog( $arguments[0] , $name );
+                break;
             case 'dump' : self::addDump( $arguments[0] ); break;
             case 'database' : self::addDatabase( $arguments[0] ); break;
+            default : throw new \Exception("Call to undefined function");
         }
 
         return true;
     }
 
-    private static function addLog( $data ) {
+    private static function addLog( $data , $type ) {
 
         $data = [
             'type' => 'log',
-            'data' => self::$ref->query($data , 'log' )
+            'data' => self::$ref->log($data , $type)
         ];
 
         self::record( $data );
@@ -93,7 +99,7 @@ class PhpDevTools {
         foreach ( $aLstRequest as $sRequest ) {
             $data = [
                 'type' => 'request',
-                'data' => self::$ref->query( $GLOBALS[$sRequest] , '$' . $sRequest , true ),
+                'data' => self::$ref->query( $GLOBALS[$sRequest] , '$' . $sRequest , true , true ),
                 'var' => [
 
                 ],

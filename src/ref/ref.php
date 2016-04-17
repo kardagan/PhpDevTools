@@ -214,9 +214,8 @@ class ref{
    *   
    * @param   mixed $subject
    * @param   string $expression
-   * @param   boolean $disableBacktrace
    */
-  public function query($subject, $expression = null, $disableBacktrace = false){
+  public function query($subject, $expression = null){
 
     if(static::$timeout > 0)
       return;
@@ -226,8 +225,27 @@ class ref{
     $this->fmt->startRoot();
     $this->fmt->startExp();
     $this->evaluateExp($expression);
-    $this->fmt->endExp( $disableBacktrace );
+    $this->fmt->endExp();
     $this->evaluate($subject);    
+    $this->fmt->endRoot();
+
+    static::$time += microtime(true) - $this->startTime;
+
+    return $this->fmt->flush();
+  }
+
+  public function log($message, $type){
+
+    if(static::$timeout > 0)
+      return;
+
+    $this->startTime = microtime(true);
+
+    $this->fmt->startRoot();
+    $this->fmt->startExp();
+    $this->fmt->log( $type );
+    $this->fmt->endExp();
+    $this->fmt->text($message);
     $this->fmt->endRoot();
 
     static::$time += microtime(true) - $this->startTime;

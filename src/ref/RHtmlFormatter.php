@@ -186,6 +186,26 @@ class RHtmlFormatter extends RFormatter{
         //$this->out .= sprintf('<%1$s%2$s %3$s>%4$s</%1$s>', $this->def['base'], $typeStr, $tip, $text);
     }
 
+    public function log ( $type ) {
+        $ico = "fa-info";
+        $color = "lightskyblue";
+        switch ( $type ) {
+            case 'alert':
+                $color = "yellow";
+                $ico = "fa-exclamation-triangle";
+                break;
+            case 'error':
+                $color = "red";
+                $ico = "fa-exclamation-circle";
+                break;
+        }
+        $this->out .= "> <span style='color:$color'><span class='fa $ico'></span> $type</span>";
+    }
+
+    public function logMessage ( $message ) {
+        $this->out .= $message;
+    }
+
     public function startContain($type, $label = false){
 
         if(!is_array($type))
