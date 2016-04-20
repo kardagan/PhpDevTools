@@ -10,8 +10,6 @@ class PhpDevTools extends \atoum {
         $this->dump($this->function->header);
         $this->function->header->wasCalledWithArguments('coucou')->once;
 */
-        echo "aa";
-        var_dump( $this->function->header->doesNothing() );
 
         $this
             ->given( $c = $this->testedClass->getClass() )
