@@ -27,7 +27,17 @@ class PhpDevTools extends \atoum {
             ->given( $c = $this->testedClass->getClass() )
             ->then
             ->boolean( $c::log('xxx') )
-            ->isFalse( null );
+            ->isFalse();
     }
+
+
+    public function testFailTest() {
+        $this
+            ->given( $c = $this->testedClass->getClass() )
+            ->then
+            ->boolean( $c::log('xxx') )
+            ->isTrue();
+    }
+
 
 }
